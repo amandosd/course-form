@@ -3,6 +3,7 @@ import { Button, Form, Input, Select, Typography, Card, Checkbox, Space, Tabs } 
 import type { SelectProps } from 'antd';
 
 import TinyEditor from './Editor';
+import { CourseSelect } from './CourseSelect'
 
 const { Option } = Select;
 
@@ -48,6 +49,7 @@ export const FormCourse: FC = () => {
         SectionId: 'female',
         form: 'female',
         category: 'category',
+        language: ["KZ"],
         preconditions: ['44','33','55'],
         timeH: 2,
         timeM: 10,
@@ -64,9 +66,9 @@ export const FormCourse: FC = () => {
     });
   };
 
-  const renderTextArea = (name: string) => {
+  const renderTextArea = (name: string, required?: boolean) => {
     return (
-        <Form.Item name={name} rules={[{ required: true }]}>
+        <Form.Item name={name} rules={[{ required }]}>
             <Input.TextArea rows={5}/>
         </Form.Item>
     )
@@ -82,9 +84,11 @@ export const FormCourse: FC = () => {
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
             >
-            <Typography.Text type="warning"></Typography.Text>
+            <Card style={{ margin: "20px 0"}}>
+                <Typography.Paragraph>On this page you can tune requisites of the course and save them. For more details, please read the Training Process Management Manual.</Typography.Paragraph>
+            </Card>
             <Card title="1. Общая информация" style={{borderRadius: 0}}>
-                <Form.Item name="code" label="Course" rules={[{ required: true }]}>
+                <Form.Item name="Code" label="Course" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item name="NameKz" label="Наименование курса" rules={[{ required: true }]}>
@@ -137,15 +141,7 @@ export const FormCourse: FC = () => {
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item name="preconditions" label="Предусловия">
-                    <Select
-                            placeholder="Выберите форма обучения"
-                            allowClear
-                            mode='multiple'
-                        >
-                            {options.map((index) => (
-                                <Option key={index.value} value={index.value}>{index.label}</Option>
-                            ))}
-                    </Select>
+                    <CourseSelect initialValue={[4,5]} />
                 </Form.Item>
                 <Label required>Длительность</Label>
                 <Space.Compact>
@@ -156,17 +152,6 @@ export const FormCourse: FC = () => {
                         <Input addonAfter="м." />
                     </Form.Item>
                 </Space.Compact>
-                <Form.Item name="preconditions" label="Предусловия">
-                    <Select
-                            placeholder="Выберите форма обучения"
-                            allowClear
-                            mode='multiple'
-                        >
-                            {options.map((index) => (
-                                <Option key={index.value} value={index.value}>{index.label}</Option>
-                            ))}
-                    </Select>
-                </Form.Item>
                 <Label required>Цель</Label>
                 <Tabs
                     defaultActiveKey="1"
@@ -178,7 +163,7 @@ export const FormCourse: FC = () => {
                             label: _,
                             key: id,
                             disabled: i === 28,
-                            children: renderTextArea(`goal${_}`),
+                            children: renderTextArea(`goal${_}`, true),
                         };
                         })}
                 />
@@ -193,7 +178,7 @@ export const FormCourse: FC = () => {
                             label: _,
                             key: id,
                             disabled: i === 28,
-                            children: renderTextArea(`audience${_}`),
+                            children: renderTextArea(`audience${_}`, true),
                         };
                         })}
                 />
