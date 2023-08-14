@@ -181,7 +181,7 @@ export const FormCourse: FC = () => {
           <Label required>{t("course.duration")}</Label>
           <Space>
             <Form.Item name="timeH" rules={[{ required: true, message: t("course.requiredFieldMsg") }]}>
-              <Input addonAfter={t("course.hour")} />
+              <Input type="number" addonAfter={t("course.hour")} />
             </Form.Item>
             <Form.Item name="timeM" rules={[{ required: true, message: t("course.requiredFieldMsg") }]}>
               <Input addonAfter={t("course.minute")} />

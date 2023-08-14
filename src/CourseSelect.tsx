@@ -4,6 +4,51 @@ import { Select, Table, Modal } from 'antd';
 
 import type { ColumnsType } from 'antd/es/table';
 
+
+
+interface FormValues {
+    nameKz: string;
+    nameRu: string;
+    nameEn: string;
+    code: string;
+    trainingProviderId: number;
+    sectionId: number;
+    deliveryTypeId: number;
+    category?: string;
+    deliveryLanguages: string[];
+    prerequisites?: number[] | [];
+    timeH: string;
+    timeM: string;
+    aimKz: string;
+    aimRu: string;
+    aimEn: string;
+    targetAuditoryKz: string;
+    targetAuditoryRu: string;
+    targetAuditoryEn: string;
+    descriptionKZ: string;
+    descriptionRU: string;
+    descriptionEN: string;
+    structureKz?: string | undefined;
+    structureRu?: string | undefined;
+    structureEn?: string | undefined;
+    certification: boolean;
+    expirationPeriod?: string | undefined;
+    owner?: string | undefined;
+    enrollmentPeriod?: string | undefined; 
+    studentsMin?: string | undefined; 
+    studentsMax?: string | undefined;
+    requirementsKz?: string | undefined;
+    requirementsRu?: string | undefined;
+    requirementsEn?: string | undefined;
+    assesmentCriteriaKZ?: string | undefined;
+    assesmentCriteriaRU?: string | undefined;
+    assesmentCriteriaEN?: string | undefined;
+}
+
+const onSubmit = () => {
+    
+}
+
 interface DataType {
     key: React.Key;
     name: string;

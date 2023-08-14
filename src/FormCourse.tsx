@@ -97,7 +97,7 @@ export const FormCourse: FC = () => {
                 <Form.Item name="NameRu" rules={[{ required: true }]}>
                     <Input addonBefore="RU" />
                 </Form.Item>
-                <Form.Item name="NameEe" rules={[{ required: true }]}>
+                <Form.Item name="nameEn" rules={[{ required: true }]}>
                     <Input addonBefore="EN" />
                 </Form.Item>
                 <Form.Item name="TrainingProviderId" label="Поставщик" rules={[{ required: true }]}>
