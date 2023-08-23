@@ -1,9 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Form, Input, Select, Typography, Card, Checkbox, Space, Tabs } from 'antd';
 import type { SelectProps } from 'antd';
 
 import TinyEditor from './Editor';
 import { CourseSelect } from './CourseSelect'
+import { MeetingForm } from './MeetingForm'
+
+import { IMeeting } from './meeting.types';
 
 const { Option } = Select;
 
@@ -30,6 +33,7 @@ const Label = ({required, children}: {required?: boolean, children: React.ReactN
 
 export const FormCourse: FC = () => {
   const [form] = Form.useForm();
+  const [meetings, setMeetings] = useState<IMeeting[]>([]);
 
   const onFinish = (values: any) => {
     console.log(values);
@@ -74,6 +78,14 @@ export const FormCourse: FC = () => {
     )
   }
 
+  const handleAddMeeting = (data: IMeeting) => {
+    setMeetings((prev: IMeeting[]) => [...prev, data])
+  }
+
+  const handleDeleteMeeting = (key: number) => {
+    setMeetings((data: IMeeting[])  => data.filter(item => item.key !== key));
+  }
+
   return (
     <div style={{padding: '15px'}}>
         <Typography.Title>Создание курса</Typography.Title>
@@ -99,6 +111,9 @@ export const FormCourse: FC = () => {
                 </Form.Item>
                 <Form.Item name="nameEn" rules={[{ required: true }]}>
                     <Input addonBefore="EN" />
+                </Form.Item>
+                <Form.Item>
+                    <MeetingForm dataSource={meetings} onAddMeeting={handleAddMeeting} onDeleteMeeting={handleDeleteMeeting} />
                 </Form.Item>
                 <Form.Item name="TrainingProviderId" label="Поставщик" rules={[{ required: true }]}>
                     <Select
